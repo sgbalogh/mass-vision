@@ -1,13 +1,15 @@
-<%= paginate @images %>
+<%= paginate @images, :window => 5 %>
 
 <table class="table table-striped table-hover table-bordered">
 
   <% @images.each do |image| %>
       <% unless image.filename.blank? %>
+
           <tr>
             <td><%= image.filename %><br>
               <code><%= image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless image.exif['exif:DateTimeOriginal'].blank? %></code><br>
               <code><%= image.exif['tiff:Model'] %></code><br>
+
               <p><%= image.exif['City'] %></p>
             </td>
 
@@ -18,4 +20,4 @@
 
 </table>
 
-<%= paginate @images %>
+<%= paginate @images, :window => 5 %>
