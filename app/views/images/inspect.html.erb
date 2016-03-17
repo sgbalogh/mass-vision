@@ -1,0 +1,27 @@
+<h1><%= @image.title %></h1><code><%= @image.id %></code>
+
+</div>
+<div id="iiif_view">
+
+  <script>
+  var map, image;
+
+  map = L.map('iiif_view', {
+  center: [0, 0],
+  crs: L.CRS.Simple,
+  zoom: 0
+  });
+
+  image = L.tileLayer.iiif('<%= '/iiif/' + @image.filename + '/info.json' %>', {
+  attribution: '<a href="#"><%= @image.id %></a>',
+  maxZoom: 6,
+  tileSize: 1024,
+  detectRetina: true
+  }).addTo(map);
+
+  </script>
+
+</div>
+<div class="container">
+<p><%= @image.description %></p>
+

@@ -1,0 +1,17 @@
+<table class="table table-striped table-hover table-bordered">
+
+  <% @images.order(_id: :asc).take(50).each do |image| %>
+      <% unless image.filename.blank? %>
+          <tr>
+            <td><%= image.filename %><br>
+              <code><%= image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless image.exif['exif:DateTimeOriginal'].blank? %></code><br>
+              <code><%= image.exif['tiff:Model'] %></code><br>
+              <p><%= image.exif['City'] %></p>
+            </td>
+
+            <td><%= link_to image_tag(get_small(image.filename)), "images/#{image._id.to_s}" %></td>
+          </tr>
+      <% end %>
+  <% end %>
+
+</table>

@@ -1,0 +1,29 @@
+<h1><%= @image.title %></h1><code><%= @image.id %></code>
+
+
+<%= link_to image_tag(root_url + "iiif/#{@image.filename}/full/2000,/0/default.jpg", class: 'reg_img'), root_url + "images/#{@image._id}/inspect" %>
+
+<p><%= @image.description %></p>
+
+
+<div class="col-md-6">
+
+  <table class="table table-striped table-hover table-bordered">
+
+    <tr><td>Date</td><td><code><%= @image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless @image.exif['exif:DateTimeOriginal'].blank? %></code></td></tr>
+    <tr><td>Camera</td><td><code><%= @image.exif['tiff:Model'] %></code></td></tr>
+    <tr><td>Aperture</td><td><code><%= @image.exif['exif:FNumber'] %></code></td></tr>
+    <tr><td>ISO</td><td><code><%= @image.exif['exif:IsoSpeedRatings'] %></code></td></tr>
+    <tr><td>Camera</td><td><code><%= @image.exif['tiff:Model'] %></code></td></tr>
+
+  </table>
+
+
+</div>
+<% if has_location? %>
+
+    <div class="col-md-6">
+    <%= render 'exifmap' %>
+      </div>
+<% end %>
+
