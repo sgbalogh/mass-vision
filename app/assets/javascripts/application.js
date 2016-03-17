@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require bootstrap-sprockets
+
 //= require leaflet
 //= require leaflet-iiif
 //= require_tree .

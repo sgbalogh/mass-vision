@@ -6,7 +6,6 @@ Rails.application.routes.draw do
   get 'images/:id' => 'images#singleimage'
   get 'images/:id/inspect' => 'images#inspect'
 
-
   iiif_for 'riiif/image', at: '/iiif'
 
   # The priority is based upon order of creation: first created -> highest priority.

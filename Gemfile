@@ -3,8 +3,12 @@ source 'https://rubygems.org'
 # Use RIIIF for IIIF image server
 gem 'riiif'
 
-gem 'bootstrap'
+gem 'bootstrap-sass'
 gem 'leaflet-rails'
+
+# Kaminari for pagination with Mongo objects
+gem 'kaminari'
+gem 'bootstrap-kaminari-views'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'

@@ -9,7 +9,7 @@ class ImagesController < ApplicationController
   end
 
   def index
-    @images = Image.all()
+    @images = Image.order(_id: :asc).page params[:page]
   end
 
 end
