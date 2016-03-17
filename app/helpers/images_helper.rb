@@ -8,5 +8,12 @@ end
     "/iiif/#{filename}/full/400,/0/default.jpg"
   end
 
+  def get_full_jpg(image)
+    root_url + 'iiif/' + image.filename + '/full/full/0/default.jpg'
+  end
+
+def get_full_png(image)
+  root_url + 'iiif/' + image.filename + '/full/full/0/default.png'
+end
 
 end

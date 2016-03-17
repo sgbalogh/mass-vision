@@ -1,12 +1,35 @@
-<h1><%= @image.title %></h1><code><%= @image.id %></code>
+<h1><%= @image.title %></h1>
 
 
 <%= link_to image_tag(root_url + "iiif/#{@image.filename}/full/2000,/0/default.jpg", class: 'reg_img'), root_url + "images/#{@image._id}/inspect" %>
 
 <p><%= @image.description %></p>
 
-
 <div class="col-md-6">
+<div class="panel panel-default">
+
+  <div class="panel-heading">
+    <code><%= @image.id %></code>
+  </div>
+<div class="panel-body">
+
+  <div class="btn-group">
+    <a href="<%= get_full_jpg(@image) %>" download="<%= @image._id %>.jpg" type="button" class="btn btn-default">Download Fullsize</a>
+    <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span href="#" class="caret"></span>
+      <span href="#" class="sr-only">Toggle Dropdown</span>
+    </a>
+    <ul class="dropdown-menu">
+      <li><a href="<%= get_full_jpg(@image) %>" download="<%= @image._id %>.jpg">JPG</a></li>
+      <li><a href="<%= get_full_png(@image) %>" download="<%= @image._id %>.png">PNG</a></li>
+    </ul>
+  </div>
+
+  <div class="btn-group">
+    <button type="button" class="btn btn-default">Download EXIF Data</button>
+
+  </div>
+  <br><br>
 
   <table class="table table-striped table-hover table-bordered">
 
@@ -18,9 +41,10 @@
     <tr><td>Camera</td><td><code><%= @image.exif['tiff:Model'] %></code></td></tr>
 
   </table>
-
+</div>
 
 </div>
+  </div>
 <% if has_location? %>
 
     <div class="col-md-6">
