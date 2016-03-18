@@ -1,23 +1,71 @@
-<%= paginate @images, :window => 5 %>
+<%= paginate @images, :window => 5 %><br>
 
+<div class="row">
+<div class="col-md-8">
 <table class="table table-striped table-hover table-bordered">
 
   <% @images.each do |image| %>
       <% unless image.filename.blank? %>
 
           <tr>
+            <td>
+              <b><%= image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless image.exif['exif:DateTimeOriginal'].blank? %></b><br>
+              <%= link_to image._id, root_path + "images/#{image._id.to_s}" %>
+            </td>
+
             <td><%= image.filename %><br>
-              <code><%= image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless image.exif['exif:DateTimeOriginal'].blank? %></code><br>
               <code><%= image.exif['tiff:Model'] %></code><br>
 
               <p><%= image.exif['City'] %></p>
             </td>
 
             <td><%= link_to image_tag(get_small(image.filename), class: 'preview_img'), root_path + "images/#{image._id.to_s}" %></td>
+
           </tr>
       <% end %>
   <% end %>
 
 </table>
+    </div>
+<div class="col-md-4">
+
+
+
+    <div id="result_map">
+      <script>
+          var center = [0, 0];
+          var map = L.map('result_map').setView(center, 1);
+          L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+              maxZoom: 19,
+              attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+              detectRetina: true
+          }).addTo(map);
+
+          function onEachFeature(feature, layer) {
+              // does this feature have a property named popupContent?
+              if (feature.properties && feature.properties.id) {
+                  layer.bindPopup('<a href="<%= root_url %>images/' + feature.properties.id + '">' + feature.properties.id + '</a>');
+              }
+          }
+
+              var geojsonFeature = L.geoJson(<%= @geojson.to_json.html_safe %>, {onEachFeature: onEachFeature
+              });
+                      geojsonFeature.addTo(map);
+
+
+
+          map.fitBounds(geojsonFeature);
+
+      </script>
+
+      </div>
+
+
+
+</div>
+<br>
+</div>
+
+
 
 <%= paginate @images, :window => 5 %>

@@ -1,5 +1,8 @@
 <div class="jumbotron">
-<h1>The free, open-source, non-profit photo repository</h1>
-<li>MongoDB, Rails, IIIF powered</li>
-  <li>RESTful as fuck</li>
-</di
+<p>Now I am become pretentious; destroyer of worlds</p>
+
+</div>
+
+<% unless !user_signed_in? %>
+<%= link_to image_tag(root_url + "iiif/AGPS1254/full/2000,/0/default.jpg", class: 'reg_img'), images_url %>
+<% end %>
