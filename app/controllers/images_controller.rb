@@ -15,6 +15,8 @@ class ImagesController < ApplicationController
     @geojson = assemble_geojson(Image.order(_id: :asc).page params[:page])
   end
 
+  # Note, the has_loc? method below is duplicated from the version in the images_helper;
+  # whenever one is modified, make sure to update the other one!
   def has_loc?(img)
     if !img.exif.blank?
       img.exif.key?('geo:lat') && img.exif.key?('geo:long')

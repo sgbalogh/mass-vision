@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
 
 
+  resources :uploads, only: [:index, :new, :create, :destroy]
+
   devise_for :users
 
   get 'users/:id' => 'users#show', as: :user

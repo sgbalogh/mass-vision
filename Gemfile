@@ -13,6 +13,10 @@ gem 'bootstrap-kaminari-views'
 # Devise for user authentication
 gem 'devise'
 
+# Carrierwave for uploads
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'carrierwave-mongoid'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'
 # Use SCSS for stylesheets
