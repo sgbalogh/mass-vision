@@ -3,6 +3,7 @@ class ImagesController < ApplicationController
 
   def singleimage
     @image = Image.find(params[:id])
+    @owner = User.find(@image.user_id)
   end
 
   def inspect
@@ -14,11 +15,15 @@ class ImagesController < ApplicationController
     @geojson = assemble_geojson(Image.order(_id: :asc).page params[:page])
   end
 
-  private
-
   def has_loc?(img)
-    img.exif.key?('geo:lat') && @image.exif.key?('geo:long') rescue true
+    if !img.exif.blank?
+      img.exif.key?('geo:lat') && img.exif.key?('geo:long')
+    else
+      false
+    end
   end
+
+  private
 
   def assemble_geojson(images)
     hash = {'type' => 'FeatureCollection', 'features' => []}
@@ -30,7 +35,7 @@ class ImagesController < ApplicationController
                         'type' => 'Point',
                         'coordinates' => [img.exif['geo:long'].to_f, img.exif['geo:lat'].to_f]
                     },
-                    'properties' => {'id' => img._id.to_s }
+                    'properties' => {'id' => img._id.to_s}
         }
         hash['features'] << img_hash
       end

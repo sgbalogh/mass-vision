@@ -7,4 +7,5 @@ class Image
   field :filename, type: String
   field :file_format, type: String
 
+  belongs_to :user
 end

@@ -2,30 +2,7 @@
 
 <div class="row">
 <div class="col-md-8">
-<table class="table table-striped table-hover table-bordered">
-
-  <% @images.each do |image| %>
-      <% unless image.filename.blank? %>
-
-          <tr>
-            <td>
-              <b><%= image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless image.exif['exif:DateTimeOriginal'].blank? %></b><br>
-              <%= link_to image._id, root_path + "images/#{image._id.to_s}" %>
-            </td>
-
-            <td><%= image.filename %><br>
-              <code><%= image.exif['tiff:Model'] %></code><br>
-
-              <p><%= image.exif['City'] %></p>
-            </td>
-
-            <td><%= link_to image_tag(get_small(image.filename), class: 'preview_img'), root_path + "images/#{image._id.to_s}" %></td>
-
-          </tr>
-      <% end %>
-  <% end %>
-
-</table>
+<%= render 'images/images_table' %>
     </div>
 <div class="col-md-4">
 

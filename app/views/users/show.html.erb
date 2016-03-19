@@ -1,0 +1,36 @@
+<h3><%= @user.email %></h3>
+
+<div class="row">
+
+  <div class="col-md-8 col-md-offset-0">
+
+    <h5>Recently Uploaded</h5>
+
+<%= render 'images/images_table' %>
+
+  </div>
+
+  <div class="col-md-4 col-md-offset-0">
+
+    <div class="panel panel-default">
+      <div class="panel-heading"><b><%= @user.email %></b><br><code><%= @user._id %></code></div>
+
+
+      <table class="table">
+
+        <tbody>
+        <tr>
+          <td>Image Uploads</td>
+          <td><code><%= @user.images.count %></code></td>
+        </tr>
+        <tr>
+          <td>Member Since</td>
+          <td><code><%= distance_of_time_in_words_to_now(@user.confirmed_at) %> ago</code></td>
+        </tr>
+        </tbody>
+
+      </table>
+    </div>
+
+  </div>
+</div>
