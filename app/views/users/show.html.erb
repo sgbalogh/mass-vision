@@ -20,8 +20,13 @@
 
         <tbody>
         <tr>
-          <td>Image Uploads</td>
+          <td>Images</td>
           <td><code><%= @user.images.count %></code></td>
+        </tr>
+        <tr>
+        <tr>
+          <td>Upload Events</td>
+          <td><code><%= @user.uploads.count %></code></td>
         </tr>
         <tr>
           <td>Member Since</td>
@@ -31,6 +36,10 @@
 
       </table>
     </div>
+
+    <%= link_to 'Batch upload images', new_upload_path, class: "btn btn-primary", role: "button" %>
+    <%= link_to 'View prior uploads', uploads_url, class: "btn btn-default", role: "button" %>
+
 
   </div>
 </div>

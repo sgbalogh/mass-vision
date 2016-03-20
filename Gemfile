@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 # Use RIIIF for IIIF image server
 gem 'riiif'
 
+# Bootstrap for UI, Leaflet for maps and IIIF image viewer (via Leaflet-IIIF)
 gem 'bootstrap-sass'
 gem 'leaflet-rails'
 
@@ -16,6 +17,14 @@ gem 'devise'
 # Carrierwave for uploads
 gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
 gem 'carrierwave-mongoid'
+
+# Delayed job for asynchronus upload processing
+gem 'delayed_job_mongoid'
+
+# Tika for image file metadata scraping
+
+# Figs for configuration/environmental variable management
+gem 'figs'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5.1'

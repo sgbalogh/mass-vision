@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   get 'images' => 'images#index'
   get 'images/:id' => 'images#singleimage'
   get 'images/:id/inspect' => 'images#inspect'
+  get 'images/:id/exif' => 'images#exif'
+  delete 'images/:id/delete' => 'images#delete'
 
   authenticate :user do
     iiif_for 'riiif/image', at: '/iiif'

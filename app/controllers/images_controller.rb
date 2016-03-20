@@ -15,6 +15,24 @@ class ImagesController < ApplicationController
     @geojson = assemble_geojson(Image.order(_id: :asc).page params[:page])
   end
 
+  def exif
+    @image = Image.find(params[:id])
+  end
+
+  def delete
+    @image = Image.find(params[:id])
+    @owner = User.find(@image.user_id)
+
+    if current_user == @owner
+      @image.destroy
+      flash[:success] = "Successfully deleted image"
+      redirect_to images_path
+    else
+      flash[:danger] = "Unauthorized!"
+      redirect_to images_path
+    end
+  end
+
   # Note, the has_loc? method below is duplicated from the version in the images_helper;
   # whenever one is modified, make sure to update the other one!
   def has_loc?(img)

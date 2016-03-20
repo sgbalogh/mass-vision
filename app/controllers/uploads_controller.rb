@@ -12,7 +12,18 @@ class UploadsController < ApplicationController
     @upload = @user.uploads.new(upload_params)
 
     if @upload.save
-      redirect_to uploads_path, notice: "The upload #{@upload.attachment} has been uploaded."
+      flash[:success] = 'Image processing has begun –– this may take a few minutes.'
+      redirect_to @user
+      uploadProcess = UploadProcess.new(@upload, @user._id)
+      uploadProcess.delay.move_upload_to_staging()
+      uploadProcess.delay.decompress_upload()
+      uploadProcess.delay.find_and_move_images()
+      uploadProcess.delay.christen_images()
+      uploadProcess.delay.assemble_metadata()
+      uploadProcess.delay.move_to_image_storage()
+      #uploadProcess.delay.cleanup()
+      #uploadProcess.delay(run_at: 10.minutes.from_now).cleanup()
+
     else
       render "new"
     end
@@ -28,5 +39,6 @@ class UploadsController < ApplicationController
   def upload_params
     params.require(:upload).permit(:attachment)
   end
+
 end
 

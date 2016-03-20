@@ -1,0 +1,11 @@
+
+
+<table class="table table-striped table-hover table-bordered">
+  <% @image.exif.each do |key, value| %>
+
+  <tr><td><%= key %></td><td><code><%= value %></code></td></tr>
+
+
+  <% end %>
+
+        </table>

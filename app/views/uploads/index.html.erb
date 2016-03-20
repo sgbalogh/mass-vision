@@ -1,2 +1,21 @@
-<h1>Uploads#index</h1>
-<p>Find me in app/views/uploads/index.html.erb</p>
+<h3>All uploads for <em><%= current_user.email %></em></h3>
+
+<table class="table table-striped table-hover table-bordered">
+  <% @uploads.each do |upload| %>
+
+      <thead>
+      <tr>
+        <th>Upload ID</th>
+        <th>User Reference</th>
+        <th>Filename</th>
+      </tr>
+      </thead>
+      <tr>
+        <td><code><%= upload._id %></code></td>
+        <td><%= link_to upload.user_id, upload.user %></td>
+        <td><code><%= File.basename(upload.attachment.to_s) %></code></td>
+      </tr>
+
+
+  <% end %>
+</table>

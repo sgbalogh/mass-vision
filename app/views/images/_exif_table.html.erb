@@ -1,0 +1,10 @@
+<table class="table table-striped table-hover table-bordered">
+
+  <tr><td>Date</td><td><code><%= @image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless @image.exif['exif:DateTimeOriginal'].blank? %></code></td></tr>
+  <tr><td>Camera</td><td><code><%= @image.exif['tiff:Model'] %></code></td></tr>
+  <tr><td>Lens</td><td><code><%= @image.exif['Lens'] %></code></td></tr>
+  <tr><td>Aperture</td><td><code><%= @image.exif['exif:FNumber'] %></code></td></tr>
+  <tr><td>ISO</td><td><code><%= @image.exif['exif:IsoSpeedRatings'] %></code></td></tr>
+  <tr><td>Camera</td><td><code><%= @image.exif['tiff:Model'] %></code></td></tr>
+
+</table>
