@@ -7,6 +7,7 @@ class UploadsController < ApplicationController
 
   def new
     @upload = Upload.new
+    @user = current_user
   end
 
   def create

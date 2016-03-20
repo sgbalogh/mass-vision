@@ -47,7 +47,6 @@ class ImagesController < ApplicationController
 
   def assemble_geojson(images)
     hash = {'type' => 'FeatureCollection', 'features' => []}
-
     images.each do |img|
       if has_loc?(img)
         img_hash = {'type' => 'Feature',
@@ -62,6 +61,5 @@ class ImagesController < ApplicationController
     end
     return hash
   end
-
 
 end

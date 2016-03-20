@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><b><%= @user.email %></b><br><code><%= @user._id %></code></div>
+  <table class="table">
+    <tbody>
+    <tr>
+      <td>Images</td>
+      <td><code><%= @user.images.count %></code></td>
+    </tr>
+    <tr>
+      <td>Upload Events</td>
+      <td><code><%= @user.uploads.count %></code></td>
+    </tr>
+    <tr>
+      <td>Member Since</td>
+      <td><code><%= distance_of_time_in_words_to_now(@user.confirmed_at) %> ago</code></td>
+    </tr>
+    </tbody>
+  </table>
+</div>

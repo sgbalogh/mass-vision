@@ -1,13 +1,14 @@
-<%= paginate @images, :window => 5 %><br>
+<h3>All images by <em><%= @user.email %></em></h3>
 
+<%= paginate @images, :window => 5 %>
 <div class="row">
   <div class="col-md-8">
     <%= render 'images/images_table' %>
   </div>
   <div class="col-md-4">
-    <%= render 'images/result_map' %>
+    <%= render 'images/result_map' %><br>
+    <%= render 'users/user_info' %>
   </div>
   <br>
 </div>
-
 <%= paginate @images, :window => 5 %>
