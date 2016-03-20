@@ -6,7 +6,7 @@
 
     <h5>Recently Uploaded</h5>
 
-<%= render 'images/images_table' %>
+    <%= render 'images/images_table' %>
 
   </div>
 
@@ -37,8 +37,10 @@
       </table>
     </div>
 
-    <%= link_to 'Batch upload images', new_upload_path, class: "btn btn-primary", role: "button" %>
-    <%= link_to 'View prior uploads', uploads_url, class: "btn btn-default", role: "button" %>
+    <% if @user == current_user %>
+        <%= link_to 'Batch upload images', new_upload_path, class: "btn btn-primary", role: "button" %>
+        <%= link_to 'View prior uploads', uploads_url, class: "btn btn-default", role: "button" %>
+    <% end %>
 
 
   </div>
