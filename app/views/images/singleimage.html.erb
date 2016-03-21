@@ -7,46 +7,49 @@
 <% end %>
 <p><%= @image.description %></p>
 
-<div class="col-md-6">
-  <div class="panel panel-default">
+<div class="row">
+  <div class="col-md-6">
+    <div class="panel panel-default">
 
-    <div class="panel-heading">
-      <code><%= @image.id %></code><br><%= link_to @owner.email, @owner, class: 'badge' %>
-    </div>
-    <div class="panel-body">
+      <div class="panel-heading">
+        <code><%= @image.id %></code><br><%= link_to @owner.email, @owner, class: 'badge' %>
+      </div>
+      <div class="panel-body">
 
-      <div class="btn-group">
-        <a href="<%= get_full_jpg(@image) %>" download="<%= @image._id %>.jpg" type="button" class="btn btn-default">Download
-          Fullsize</a>
-        <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span href="#" class="caret"></span>
-          <span href="#" class="sr-only">Toggle Dropdown</span>
-        </a>
-        <ul class="dropdown-menu">
-          <li><a href="<%= get_full_jpg(@image) %>" download="<%= @image._id %>.jpg">JPG</a></li>
-          <li><a href="<%= get_full_png(@image) %>" download="<%= @image._id %>.png">PNG</a></li>
-        </ul>
+        <div class="btn-group">
+          <a href="<%= get_full_jpg(@image) %>" download="<%= @image._id %>.jpg" type="button" class="btn btn-default">Download
+            Fullsize</a>
+          <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span href="#" class="caret"></span>
+            <span href="#" class="sr-only">Toggle Dropdown</span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="<%= get_full_jpg(@image) %>" download="<%= @image._id %>.jpg">JPG</a></li>
+            <li><a href="<%= get_full_png(@image) %>" download="<%= @image._id %>.png">PNG</a></li>
+          </ul>
+        </div>
+
+        <%= link_to 'Full EXIF', root_url + "images/#{@image._id}/exif", class: "btn btn-default", role: "button" %>
+
+        <% if is_owner_or_admin?(current_user) %>
+            <% # link_to 'Edit', root_url + "images/#{@image._id}/exif", class: "btn btn-warning", role: "button" %>
+            <%= link_to 'Delete', root_url + "images/#{@image._id}/delete", class: "btn btn-danger", method: :delete, role: "button" %>
+        <% end %>
+
+        <br><br>
+        <% if has_exif? %>
+            <%= render 'images/exif_table' %>
+        <% end %>
       </div>
 
-      <%= link_to 'Full EXIF', root_url + "images/#{@image._id}/exif", class: "btn btn-default", role: "button" %>
-
-      <% if is_owner_or_admin?(current_user) %>
-          <% # link_to 'Edit', root_url + "images/#{@image._id}/exif", class: "btn btn-warning", role: "button" %>
-          <%= link_to 'Delete', root_url + "images/#{@image._id}/delete", class: "btn btn-danger", method: :delete, role: "button" %>
-      <% end %>
-
-      <br><br>
-      <% if has_exif? %>
-          <%= render 'images/exif_table' %>
-      <% end %>
     </div>
-
   </div>
-</div>
-<% if has_location? %>
 
-    <div class="col-md-6">
-      <%= render 'exifmap' %>
-    </div>
-<% end %>
+  <% if has_location? %>
+      <div class="col-md-6">
+        <%= render 'exifmap' %>
+      </div>
+  <% end %>
+
+</div>
 

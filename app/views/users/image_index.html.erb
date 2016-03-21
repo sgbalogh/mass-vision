@@ -1,6 +1,6 @@
 <h3>All images by <em><%= @user.email %></em></h3>
 
-<%= paginate @images, :window => 5 %>
+<%= paginate @images, :window => 5, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>
 <div class="row">
   <div class="col-md-8">
     <%= render 'images/images_table' %>
@@ -11,4 +11,4 @@
   </div>
   <br>
 </div>
-<%= paginate @images, :window => 5 %>
+<%= paginate @images, :window => 5, :theme => 'twitter-bootstrap-3', :pagination_class => "pagination-sm" %>
