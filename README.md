@@ -35,7 +35,6 @@ Finally, clone the repo:
 ```
 cd ~
 git clone https://github.com/sgbalogh/mass-vision.git
-
 ```
 
 From there, you can run the database migrations (`rake db:migrate`), and try booting up the application (`rails s -b 0.0.0.0`). To start a Delayed Job worker, run the rake task `rake jobs:work`, and hit Ctrl-C when you are ready to stop the worker.
