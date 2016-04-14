@@ -54,7 +54,7 @@ class ImagesController < ApplicationController
                         'type' => 'Point',
                         'coordinates' => [img.exif['geo:long'].to_f, img.exif['geo:lat'].to_f]
                     },
-                    'properties' => {'id' => img._id.to_s}
+                    'properties' => {'id' => img._id.to_s, 'jpg' => img.filename}
         }
         hash['features'] << img_hash
       end

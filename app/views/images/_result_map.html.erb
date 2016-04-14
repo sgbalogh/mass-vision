@@ -2,16 +2,15 @@
   <script>
       var center = [0, 0];
       var map = L.map('result_map').setView(center, 1);
-      L.tileLayer('http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="http://cartodb.com/attributions">CartoDB</a>',
-          subdomains: 'abcd',
+      L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
+          attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
           detectRetina: true
       }).addTo(map);
       function onEachFeature(feature, layer) {
           // does this feature have a property named popupContent?
           if (feature.properties && feature.properties.id) {
-              layer.bindPopup('<a href="<%= root_url %>images/' + feature.properties.id + '">' + feature.properties.id + '</a>');
+              layer.bindPopup('<a href="<%= root_url %>images/' + feature.properties.id + '"> <img class="preview_img" src="/iiif/' + feature.properties.jpg +'/full/300,/0/default.jpg" alt="Default"> </a>');
           }
       }
       var geojsonFeature = L.geoJson(<%= @geojson.to_json.html_safe %>, {onEachFeature: onEachFeature
