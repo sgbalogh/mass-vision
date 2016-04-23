@@ -16,9 +16,7 @@ Rails.application.routes.draw do
   get 'images/:id/exif' => 'images#exif'
   delete 'images/:id/delete' => 'images#delete'
 
-  authenticate :user do
-    iiif_for 'riiif/image', at: '/iiif'
-  end
+  iiif_for 'riiif/image', at: '/iiif'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

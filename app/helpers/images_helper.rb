@@ -21,7 +21,7 @@ module ImagesHelper
   end
 
   def get_small(filename)
-    "/iiif/#{filename}/full/300,/0/default.jpg"
+    "/iiif/#{filename}/full/400,/0/default.jpg"
   end
 
   def get_full_jpg(image)

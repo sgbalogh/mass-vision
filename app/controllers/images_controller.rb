@@ -1,9 +1,16 @@
 class ImagesController < ApplicationController
-  before_action :authenticate_user!
 
   def singleimage
     @image = Image.find(params[:id])
     @owner = User.find(@image.user_id)
+    if !@image.access.nil?
+      unless @image.access['public']
+        authenticate_user!
+      end
+    else
+      authenticate_user!
+    end
+
   end
 
   def inspect
@@ -11,8 +18,13 @@ class ImagesController < ApplicationController
   end
 
   def index
-    @images = Image.order(_id: :asc).page params[:page]
-    @geojson = assemble_geojson(Image.order(_id: :asc).page params[:page])
+    if user_signed_in?
+      @images = Image.order(_id: :asc).page params[:page]
+      @geojson = assemble_geojson(Image.order(_id: :asc).page params[:page])
+    else
+      @images = Image.where(access: {public: true}).order(_id: :asc).page params[:page]
+      @geojson = assemble_geojson(Image.where(access: {public: true}).order(_id: :asc).page params[:page])
+    end
   end
 
   def exif

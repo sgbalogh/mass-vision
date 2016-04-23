@@ -1,30 +1,22 @@
 <table class="table table-striped table-hover table-bordered">
-
   <% @images.each do |image| %>
       <% unless image.filename.blank? %>
           <% owner = User.find(image.user_id) %>
-
           <tr>
             <td>
               <b><%= image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless image.exif['exif:DateTimeOriginal'].blank? %></b><br>
               <code><%= link_to image._id, root_path + "images/#{image._id.to_s}" %></code><br>
               <%= link_to owner.email, owner, class: 'badge alert-danger' %>
             </td>
-
             <td>
               <% if has_loc?(image) %>
                   <p><b><%= image.exif['City'] %></b><br>
                     <%= image.exif['Country/Primary Location Name'] %></p>
               <% end %>
-
               <code><%= image.exif['tiff:Model'] %></code><br>
-
             </td>
-
             <td><%= link_to image_tag(get_small(image.filename), class: 'preview_img'), root_path + "images/#{image._id.to_s}" %></td>
-
           </tr>
       <% end %>
   <% end %>
-
 </table>
