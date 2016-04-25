@@ -27,6 +27,10 @@
 <div class="well">
   <%= form_for @upload, html: { multipart: true } do |f| %>
 
+      <%= f.label :access, class: "form_id" %>
+      <%= f.select :access, ['Public (Global)', 'Public (Signed in)', 'Private'], class: 'form-control'%>
+      <br>
+
       <%= f.label :attachment %>
       <%= f.file_field :attachment %>
       <%= f.submit "Save", class: "btn btn-primary" %>

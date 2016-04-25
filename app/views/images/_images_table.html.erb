@@ -6,7 +6,7 @@
             <td>
               <b><%= image.exif['exif:DateTimeOriginal'].to_date.strftime("%B %d, %Y") unless image.exif['exif:DateTimeOriginal'].blank? %></b><br>
               <code><%= link_to image._id, root_path + "images/#{image._id.to_s}" %></code><br>
-              <%= link_to owner.email, owner, class: 'badge alert-danger' %>
+              <%= link_to /^[^\@]*/.match(owner.email)[0], owner, class: 'badge alert-danger' %>
             </td>
             <td>
               <% if has_loc?(image) %>

@@ -8,6 +8,8 @@ class User
   has_many :images
   has_many :uploads
 
+  field :handle, type: String, default: ""
+
   ## Database authenticatable
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""

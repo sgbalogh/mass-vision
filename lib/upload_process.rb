@@ -6,6 +6,7 @@ class UploadProcess
   def initialize(upload, userid)
     @upload = upload
     @upload_id = upload._id
+    @access_text = upload.access
     @attachment_name = File.basename(upload.attachment.to_s)
     @staging_path = "#{Rails.root}/user_uploads/staging_area/#{@upload_id}"
     @staging_zip_path = "#{Rails.root}/user_uploads/staging_area/#{@upload_id}/zip/#{@attachment_name}"
@@ -69,7 +70,7 @@ class UploadProcess
 
         filename = File.basename(tika['resourceName'], File.extname(tika['resourceName']))
         extension = (File.extname(tika['resourceName'])).gsub(".", "")
-        metadata_hash = {filename: filename, exif: tika, file_format: extension, user_id: @userid}
+        metadata_hash = {filename: filename, exif: tika, file_format: extension, user_id: @userid, access: {level: translate_access}}
         upload_meta_array << metadata_hash
       end
     end
@@ -94,6 +95,17 @@ class UploadProcess
   def cleanup
     FileUtils.remove_dir(@staging_path)
     FileUtils.rm(@filepath)
+  end
+
+  def translate_access
+    case @access_text
+      when "Public (Global)"
+        1
+      when "Public (Signed in)"
+        2
+      when "Private"
+        3
+    end
   end
 
 end

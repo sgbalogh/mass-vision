@@ -9,7 +9,7 @@ module Riiif
     def get_authed
       img = ApplicationController::Image.find_by('filename': image_id)
       if !img.access.nil?
-        unless img.access['public']
+        unless img.access['level'] == 1
           authenticate_user!
         end
       else

@@ -1,7 +1,7 @@
 <h1><%= @image.title %></h1>
 
 <% if has_image? %>
-    <%= link_to image_tag(root_url + "iiif/#{@image.filename}/full/2000,/0/default.jpg", class: 'reg_img'), root_url + "images/#{@image._id}/inspect" %>
+    <%= link_to image_tag(root_url + "iiif/#{@image.filename}/full/2200,/0/default.jpg", class: 'reg_img'), root_url + "images/#{@image._id}/inspect" %>
 <% else %>
     <h4 class="well">No Image!</h4>
 <% end %>
@@ -12,7 +12,7 @@
     <div class="panel panel-default">
 
       <div class="panel-heading">
-        <code><%= @image.id %></code><br><%= link_to @owner.email, @owner, class: 'badge' %>
+        <code><%= @image.id %></code><br><%= link_to /^[^\@]*/.match(@owner.email)[0], @owner, class: 'badge' %>
       </div>
       <div class="panel-body">
 

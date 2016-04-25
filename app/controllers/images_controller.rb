@@ -4,7 +4,7 @@ class ImagesController < ApplicationController
     @image = Image.find(params[:id])
     @owner = User.find(@image.user_id)
     if !@image.access.nil?
-      unless @image.access['public']
+      unless @image.access['level'] == 1
         authenticate_user!
       end
     else
@@ -22,8 +22,8 @@ class ImagesController < ApplicationController
       @images = Image.order(_id: :asc).page params[:page]
       @geojson = assemble_geojson(Image.order(_id: :asc).page params[:page])
     else
-      @images = Image.where(access: {public: true}).order(_id: :asc).page params[:page]
-      @geojson = assemble_geojson(Image.where(access: {public: true}).order(_id: :asc).page params[:page])
+      @images = Image.where(access: {level: 1}).order(_id: :asc).page params[:page]
+      @geojson = assemble_geojson(Image.where(access: {level: 1}).order(_id: :asc).page params[:page])
     end
   end
 
