@@ -1,5 +1,5 @@
 ## Mass-Vision
-A Ruby on Rails photo archive for lazy data lovers
+A Ruby on Rails photo archive application
 
 #### Introduction
 This application, currenly called *Mass-Vision* (until I think of something more clever), was built to support large batch image uploads, and to scrape as much meaning as possible from photographic metadata and location data, where it exists.
