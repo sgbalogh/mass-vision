@@ -9,13 +9,13 @@
               <%= link_to /^[^\@]*/.match(owner.email)[0], owner, class: 'badge alert-danger' %>
             </td>
             <td>
-              <% if has_loc?(image) %>
+              <% if image.has_location? %>
                   <p><b><%= image.exif['City'] %></b><br>
                     <%= image.exif['Country/Primary Location Name'] %></p>
               <% end %>
               <code><%= image.exif['tiff:Model'] %></code><br>
             </td>
-            <td><%= link_to image_tag(get_small(image.filename), class: 'preview_img'), root_path + "images/#{image._id.to_s}" %></td>
+            <td><%= link_to image_tag(preview_image_href(image.filename), class: 'preview_img'), root_path + "images/#{image._id.to_s}" %></td>
           </tr>
       <% end %>
   <% end %>

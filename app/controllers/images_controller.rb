@@ -1,4 +1,5 @@
 class ImagesController < ApplicationController
+  helper_method :has_loc?
 
   def singleimage
     @image = Image.find(params[:id])
@@ -10,7 +11,6 @@ class ImagesController < ApplicationController
     else
       authenticate_user!
     end
-
   end
 
   def inspect
@@ -34,7 +34,6 @@ class ImagesController < ApplicationController
   def delete
     @image = Image.find(params[:id])
     @owner = User.find(@image.user_id)
-
     if current_user == @owner
       @image.destroy
       flash[:success] = "Successfully deleted image"
@@ -45,11 +44,9 @@ class ImagesController < ApplicationController
     end
   end
 
-  # Note, the has_loc? method below is duplicated from the version in the images_helper;
-  # whenever one is modified, make sure to update the other one!
   def has_loc?(img)
-    if !img.exif.blank?
-      img.exif.key?('geo:lat') && img.exif.key?('geo:long')
+    if img.latitude && img.longitude
+      true
     else
       false
     end
@@ -58,20 +55,20 @@ class ImagesController < ApplicationController
   private
 
   def assemble_geojson(images)
-    hash = {'type' => 'FeatureCollection', 'features' => []}
+    geojson_doc = {'type' => 'FeatureCollection', 'features' => []}
     images.each do |img|
       if has_loc?(img)
         img_hash = {'type' => 'Feature',
                     'geometry' => {
                         'type' => 'Point',
-                        'coordinates' => [img.exif['geo:long'].to_f, img.exif['geo:lat'].to_f]
+                        'coordinates' => [img.longitude, img.latitude]
                     },
                     'properties' => {'id' => img._id.to_s, 'jpg' => img.filename}
         }
-        hash['features'] << img_hash
+        geojson_doc['features'] << img_hash
       end
     end
-    return hash
+    return geojson_doc
   end
 
 end

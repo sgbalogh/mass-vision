@@ -1,55 +1,45 @@
 <h1><%= @image.title %></h1>
-
 <% if has_image? %>
-    <%= link_to image_tag(root_url + "iiif/#{@image.filename}/full/2200,/0/default.jpg", class: 'reg_img'), root_url + "images/#{@image._id}/inspect" %>
+    <%= main_image_tag %>
 <% else %>
     <h4 class="well">No Image!</h4>
 <% end %>
 <p><%= @image.description %></p>
-
 <div class="row">
   <div class="col-md-6">
     <div class="panel panel-default">
-
       <div class="panel-heading">
         <code><%= @image.id %></code><br><%= link_to /^[^\@]*/.match(@owner.email)[0], @owner, class: 'badge' %>
       </div>
       <div class="panel-body">
-
         <div class="btn-group">
-          <a href="<%= get_full_jpg(@image) %>" download="<%= @image._id %>.jpg" type="button" class="btn btn-default">Download
+          <a href="<%= get_full_image(@image, 'jpg') %>" download="<%= @image._id %>.jpg" type="button" class="btn btn-default">Download
             Fullsize</a>
           <a type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span href="#" class="caret"></span>
             <span href="#" class="sr-only">Toggle Dropdown</span>
           </a>
           <ul class="dropdown-menu">
-            <li><a href="<%= get_full_jpg(@image) %>" download="<%= @image._id %>.jpg">JPG</a></li>
-            <li><a href="<%= get_full_png(@image) %>" download="<%= @image._id %>.png">PNG</a></li>
+            <li><a href="<%= get_full_image(@image, 'jpg') %>" download="<%= @image._id %>.jpg">JPG</a></li>
+            <li><a href="<%= get_full_image(@image, 'png') %>" download="<%= @image._id %>.png">PNG</a></li>
           </ul>
         </div>
-
         <%= link_to 'Full EXIF', root_url + "images/#{@image._id}/exif", class: "btn btn-default", role: "button" %>
-
         <% if is_owner_or_admin?(current_user) %>
             <% # link_to 'Edit', root_url + "images/#{@image._id}/exif", class: "btn btn-warning", role: "button" %>
             <%= link_to 'Delete', root_url + "images/#{@image._id}/delete", class: "btn btn-danger", method: :delete, role: "button" %>
         <% end %>
-
         <br><br>
-        <% if has_exif? %>
+        <% if @image.has_exif? %>
             <%= render 'images/exif_table' %>
         <% end %>
       </div>
-
     </div>
   </div>
-
-  <% if has_location? %>
+  <% if @image.has_location? %>
       <div class="col-md-6">
         <%= render 'exifmap' %>
       </div>
   <% end %>
-
 </div>
 

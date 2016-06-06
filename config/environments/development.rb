@@ -1,9 +1,12 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
+  # Load environment variables
   Figs.load()
 
-  Riiif::Image.file_resolver.base_path = '/Users/stephen/RubymineProjects/pretentiovision/image_storage'
+  # Set path of image storage directory for IIIF service
+  Riiif::Image.file_resolver.base_path = ENV['IMAGE_STORAGE']
+
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
   # since you don't have to restart the web server when you make code changes.

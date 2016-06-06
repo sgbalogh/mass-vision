@@ -10,7 +10,7 @@
       function onEachFeature(feature, layer) {
           // does this feature have a property named popupContent?
           if (feature.properties && feature.properties.id) {
-              layer.bindPopup('<a href="<%= root_url %>images/' + feature.properties.id + '"> <img class="preview_img" src="/iiif/' + feature.properties.jpg +'/full/300,/0/default.jpg" alt="Default"> </a>');
+              layer.bindPopup('<a href="<%= root_url %>images/' + feature.properties.id + '">' + feature.properties.id + '</a>');
           }
       }
       var geojsonFeature = L.geoJson(<%= @geojson.to_json.html_safe %>, {onEachFeature: onEachFeature
