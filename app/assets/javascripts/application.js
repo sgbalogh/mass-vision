@@ -42,8 +42,8 @@ var send_retina_param = function () {
         uhd = 'retina=false'
     }
     var links = document.getElementsByTagName('a');
-    var param_char = '?';
     for (var i = 0; i < links.length; i++) {
+		var param_char = '?';
         if (links[i].href.indexOf('?') > -1) {
             param_char = '&';
         }
