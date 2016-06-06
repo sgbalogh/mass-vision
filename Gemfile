@@ -2,6 +2,7 @@ source 'https://rubygems.org'
 
 # Use RIIIF for IIIF image server
 gem 'riiif'
+gem 'daemons'
 
 # Bootstrap for UI, Leaflet for maps and IIIF image viewer (via Leaflet-IIIF)
 gem 'bootstrap-sass'

@@ -17,16 +17,8 @@ class UploadsController < ApplicationController
     if @upload.save
       flash[:success] = 'Image processing has begun –– this may take a few minutes.'
       redirect_to @user
-      uploadProcess = UploadProcess.new(@upload, @user._id)
-      uploadProcess.delay.move_upload_to_staging()
-      uploadProcess.delay.decompress_upload()
-      uploadProcess.delay.find_and_move_images()
-      uploadProcess.delay.christen_images()
-      uploadProcess.delay.assemble_metadata()
-      uploadProcess.delay.move_to_image_storage()
-      #uploadProcess.delay.cleanup()
-      #uploadProcess.delay(run_at: 10.minutes.from_now).cleanup()
-
+      uploadProcess = UploadProcess.new(@upload, @user)
+      uploadProcess.start_processing
     else
       render "new"
     end

@@ -7,7 +7,6 @@
           attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
           detectRetina: true
       }).addTo(map);
-
       var point = L.marker([<%= @image.exif['geo:lat'] %>, <%= @image.exif['geo:long'] %>]).addTo(map);
       point.bindPopup('<b><%= @image.exif['City'] %></b><br><%= @image.exif['Country/Primary Location Name'] %><br><br><b>lat:</b> <code><%= @image.exif['geo:lat'] %></code><br><b>long:</b> <code><%= @image.exif['geo:long'] %></code>');
   </script>

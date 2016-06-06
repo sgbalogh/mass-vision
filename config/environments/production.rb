@@ -1,11 +1,11 @@
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
-  # Load environmental variables
+  # Load environment variables
   Figs.load()
 
   # Set path of image storage directory for IIIF service
-  Riiif::Image.file_resolver.base_path = ENV['PROD_IMAGE_STORE']
+  Riiif::Image.file_resolver.base_path = ENV['IMAGE_STORAGE']
 
   config.action_mailer.default_url_options = { :host => ENV['MAILER_URL'] }
 

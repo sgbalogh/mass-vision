@@ -6,6 +6,7 @@ module Riiif
       render nothing: true, status: 400
     end
 
+    # Below method, and call in show(), is only addition to the original Riiif::ImagesController
     def get_authed
       img = ApplicationController::Image.find_by('filename': image_id)
       if !img.access.nil?

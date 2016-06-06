@@ -17,29 +17,27 @@
         To import images, simply follow these instructions:
         <ol>
           <li>Throw all of the images you want to add into a folder</li>
-        <li>Compress the folder into a <code>.zip</code> archive</li>
-       <li>Upload it!</li>
+          <li>Compress the folder into a <code>.zip</code> archive</li>
+          <li>Upload it!</li>
         </ol>
       </div>
     </div>
 
+    <div class="well">
+      <%= form_for @upload, html: {multipart: true} do |f| %>
 
-<div class="well">
-  <%= form_for @upload, html: { multipart: true } do |f| %>
+          <%= f.label :access, class: "form_id" %>
+          <%= f.select :access, ['Public (Global)', 'Public (Signed in)', 'Private'], class: 'form-control' %>
+          <br>
 
-      <%= f.label :access, class: "form_id" %>
-      <%= f.select :access, ['Public (Global)', 'Public (Signed in)', 'Private'], class: 'form-control'%>
-      <br>
-
-      <%= f.label :attachment %>
-      <%= f.file_field :attachment %>
-      <%= f.submit "Save", class: "btn btn-primary" %>
-  <% end %>
-</div>
-
+          <%= f.label :attachment %>
+          <%= f.file_field :attachment %>
+          <%= f.submit "Save", class: "btn btn-primary" %>
+      <% end %>
     </div>
+
+  </div>
   <div class="col-md-4 col-md-offset-0">
     <%= render 'users/user_info' %>
   </div>
-
 </div>
